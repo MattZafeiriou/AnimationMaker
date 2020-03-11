@@ -20,6 +20,7 @@ import MattZafeiriou.Animations.Screen.MainScreen;
 import MattZafeiriou.Animations.Topbar.Bar;
 import MattZafeiriou.Animations.Utils.Loader;
 import MattZafeiriou.Animations.Utils.Mouse;
+import MattZafeiriou.Animations.Utils.MouseCursor;
 
 public class Renderer
 {
@@ -83,6 +84,8 @@ public class Renderer
 		drawTopButtons( 40, 30 );
 
 		Bar.renderBars( g );
+
+		MouseCursor.setCursor();
 	}
 
 	private static void drawTopButtons( int ButtonWidth, int ButtonHeight )

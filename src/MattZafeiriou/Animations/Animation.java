@@ -11,6 +11,7 @@ import MattZafeiriou.Animations.Topbar.Bar;
 import MattZafeiriou.Animations.Topbar.ElementAction;
 import MattZafeiriou.Animations.Utils.Keyboard;
 import MattZafeiriou.Animations.Utils.Mouse;
+import MattZafeiriou.Animations.Utils.MouseCursor;
 import MattZafeiriou.Animations.Utils.Window;
 
 public class Animation implements Runnable
@@ -60,8 +61,11 @@ public class Animation implements Runnable
 	{
 
 		if( state == State.UPDATING )
+		{
+			MouseCursor.setFrame( frame );
+
 			init();
-		else
+		} else
 			Renderer.init( frame, canvas, 3 );
 
 		int fps = 60;
@@ -129,7 +133,6 @@ public class Animation implements Runnable
 		} };
 		Bar.createBar( "File", oof );
 		Bar.createBar( "noob", oof );
-
 	}
 
 	public synchronized void start()

@@ -1,9 +1,13 @@
 package MattZafeiriou.Animations.Screen;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
+
+import MattZafeiriou.Animations.Utils.Mouse;
+import MattZafeiriou.Animations.Utils.MouseCursor;
 
 public class InfoScreen
 {
@@ -26,11 +30,18 @@ public class InfoScreen
 		Width = ( frame.getWidth() / 100 ) * percentW;
 		Height = ( frame.getWidth() / 100 ) * percentH - 25;
 
-		InfoBox.createBox( "Name", X + 10, InfoBox.Type.CHECKBOX );
+		InfoBox.createBox( "Name", X + 10, InfoBox.Type.INPUT, frame, 50 );
 	}
 
 	public void render( Graphics g )
 	{
+		int mouseX = Mouse.getInstance().getX();
+		int mouseY = Mouse.getInstance().getY();
+		if( mouseX >= this.X && mouseX <= this.X + this.Width && mouseY >= this.Y && mouseY <= this.Y + this.Height )
+		{
+			MouseCursor.changeCursor( Cursor.getPredefinedCursor( Cursor.DEFAULT_CURSOR ), 5 );
+		}
+
 		g.setColor( new Color( 60, 60, 60 ) );
 		g.fillRect( X, Y, Width, Height );
 

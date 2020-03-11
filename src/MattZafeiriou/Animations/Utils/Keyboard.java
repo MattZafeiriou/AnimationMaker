@@ -3,6 +3,7 @@ package MattZafeiriou.Animations.Utils;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import MattZafeiriou.Animations.Screen.InfoBox;
 import MattZafeiriou.Animations.Screen.Input.ScreenKeyboard;
 
 public class Keyboard implements KeyListener
@@ -25,6 +26,7 @@ public class Keyboard implements KeyListener
 	public void keyPressed( KeyEvent e )
 	{
 		ScreenKeyboard.getInstance().KeyDown( e.getKeyCode() );
+		InfoBox.keyButtonDown( e.getKeyChar(), e.getKeyCode() );
 	}
 
 	@Override

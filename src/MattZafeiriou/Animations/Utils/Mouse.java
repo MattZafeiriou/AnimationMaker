@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 
 import MattZafeiriou.Animations.Images.ImageType;
 import MattZafeiriou.Animations.Program.ProgramVariables;
+import MattZafeiriou.Animations.Screen.InfoBox;
 import MattZafeiriou.Animations.Screen.MainScreen;
 import MattZafeiriou.Animations.Topbar.Bar;
 
@@ -92,6 +93,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	public void mouseReleased( MouseEvent e )
 	{
 		mainScreen.mouseUp( e.getButton() );
+		InfoBox.mouseButtonUp( e.getButton(), e.getX(), e.getY() );
 	}
 
 	@Override

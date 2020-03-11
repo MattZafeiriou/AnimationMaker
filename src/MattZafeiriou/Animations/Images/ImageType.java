@@ -2,6 +2,7 @@ package MattZafeiriou.Animations.Images;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -11,6 +12,7 @@ import java.util.List;
 import MattZafeiriou.Animations.Program.ProgramVariables;
 import MattZafeiriou.Animations.Screen.MainScreen;
 import MattZafeiriou.Animations.Utils.Mouse;
+import MattZafeiriou.Animations.Utils.MouseCursor;
 import MattZafeiriou.Animations.Utils.Position;
 
 public class ImageType
@@ -115,6 +117,8 @@ public class ImageType
 
 		if( getSelectedImage != this && isHovering )
 		{
+			MouseCursor.changeCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ), 10 );
+
 			( (Graphics2D) g ).setStroke( new BasicStroke( 3 * scale ) );
 
 			g.setColor( new Color( 194, 194, 194 ) );

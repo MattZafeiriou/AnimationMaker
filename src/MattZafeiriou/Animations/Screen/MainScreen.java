@@ -3,6 +3,7 @@ package MattZafeiriou.Animations.Screen;
 import java.awt.AWTException;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,6 +22,7 @@ import MattZafeiriou.Animations.Program.ProgramVariables;
 import MattZafeiriou.Animations.Screen.Input.ScreenKeyboard;
 import MattZafeiriou.Animations.Utils.Loader;
 import MattZafeiriou.Animations.Utils.Mouse;
+import MattZafeiriou.Animations.Utils.MouseCursor;
 import MattZafeiriou.Animations.Utils.Position;
 import MattZafeiriou.Animations.Utils.Scaler;
 
@@ -55,6 +57,14 @@ public class MainScreen
 
 	public void render( Graphics g )
 	{
+		int mouseX = Mouse.getInstance().getX();
+		int mouseY = Mouse.getInstance().getY();
+		if( mouseX >= getCanvasPositionX && mouseX <= getCanvasPositionX + getCanvasWidth
+				&& mouseY >= getCanvasPositionY && mouseY <= getCanvasPositionY + getCanvasHeight )
+		{
+			MouseCursor.changeCursor( Cursor.getPredefinedCursor( Cursor.DEFAULT_CURSOR ), 5 );
+		}
+
 		canvasScale = Scaler.getCanvasScale();
 		scaleKeyValue = Scaler.scaleKeyValue;
 

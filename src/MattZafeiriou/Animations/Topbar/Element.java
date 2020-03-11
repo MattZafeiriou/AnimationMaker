@@ -32,8 +32,9 @@ public class Element
 			return;
 
 		if( isHovering )
+		{
 			g.setColor( new Color( 60, 60, 60 ) );
-		else
+		} else
 			g.setColor( new Color( 40, 40, 40 ) );
 		g.fillRect( x, y, width, height );
 
