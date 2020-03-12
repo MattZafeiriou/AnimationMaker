@@ -257,7 +257,7 @@ public class MainScreen
 	public void init( int getCanvasPositionX, int getCanvasPositionY, int getCanvasWidth, int getCanvasHeight,
 			JFrame frame )
 	{
-		ImageType.makeImage( Loader.loadImage( "D:/Program Files/User/Pictures/pro.png" ), 10, 10 );
+		ImageType.makeImage( Loader.loadImage( "D:/Program Files/User/Pictures/pro.png" ), 10, 10, "Pro" );
 		Scaler.init();
 		this.PercentW = getCanvasWidth;
 		this.PercentH = getCanvasHeight;

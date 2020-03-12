@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import MattZafeiriou.Animations.Program.ProgramVariables;
+import MattZafeiriou.Animations.Screen.InfoBox;
+import MattZafeiriou.Animations.Screen.InfoScreen;
 import MattZafeiriou.Animations.Screen.MainScreen;
 import MattZafeiriou.Animations.Utils.Mouse;
 import MattZafeiriou.Animations.Utils.MouseCursor;
@@ -25,9 +27,9 @@ public class ImageType
 
 	public static ImageType getSelectedImage;
 
-	public static ImageType makeImage( BufferedImage shownImage, int x, int y )
+	public static ImageType makeImage( BufferedImage shownImage, int x, int y, String name )
 	{
-		ImageType newImage = new ImageType( shownImage, x, y );
+		ImageType newImage = new ImageType( shownImage, x, y, name );
 		getImageTypes.add( newImage );
 		return newImage;
 	}
@@ -62,6 +64,7 @@ public class ImageType
 	 */
 
 	private BufferedImage shownImage;
+	private String name = "";
 
 	// image's coords
 	public int getPositionX, getPositionY;
@@ -73,9 +76,21 @@ public class ImageType
 	public void setSelected( boolean isSelected )
 	{
 		if( isSelected )
+		{
+			if( getSelectedImage != this )
+			{
+				InfoScreen.createBox( "Name", InfoBox.Type.INPUT, 15, name );
+				InfoBox.makeSection( 20 );
+				InfoScreen.createBox( "X", InfoBox.Type.INPUT, 15, getPositionX + "" );
+				InfoScreen.createBox( "Y", InfoBox.Type.INPUT, 15, getPositionY + "" );
+			}
 			getSelectedImage = this;
-		else
+		} else
+		{
+			if( getSelectedImage != null )
+				InfoBox.deleteBoxes();
 			getSelectedImage = null;
+		}
 	}
 
 	protected void draw( Graphics g, int getCanvasPositionX, int getCanvasPositionY, float XOffset, float YOffset,
@@ -142,7 +157,7 @@ public class ImageType
 		int msW = MainScreen.getCanvasWidth;
 		int msH = MainScreen.getCanvasHeight;
 
-		if( x >= msX + msW || x + w <= msX || y >= msY + msH || y + h <= msY )
+		if( ( x >= msX + msW || x + w <= msX || y >= msY + msH || y + h <= msY ) && getSelectedImage != this )
 			return;
 
 		int mouseX = Mouse.getInstance().getX();
@@ -152,6 +167,33 @@ public class ImageType
 			isHovering = true;
 		} else
 			isHovering = false;
+
+		if( getSelectedImage == this )
+		{
+			this.name = InfoBox.getBoxByName( "Name" ).getInputValue();
+			String xtext = InfoBox.getBoxByName( "X" ).getInputValue();
+			if( xtext.matches( "-?\\d+" ) )
+			{
+				if( Long.parseLong( xtext ) > Integer.MAX_VALUE )
+					this.getPositionX = Integer.MAX_VALUE;
+				else if( Long.parseLong( xtext ) < Integer.MIN_VALUE )
+					this.getPositionX = Integer.MIN_VALUE;
+				else
+					this.getPositionX = Integer.parseInt( xtext );
+			}
+
+			String ytext = InfoBox.getBoxByName( "Y" ).getInputValue();
+			if( ytext.matches( "-?\\d+" ) )
+			{
+				if( Long.parseLong( ytext ) > Integer.MAX_VALUE )
+					this.getPositionY = Integer.MAX_VALUE;
+				else if( Long.parseLong( ytext ) < Integer.MIN_VALUE )
+					this.getPositionY = Integer.MIN_VALUE;
+				else
+					this.getPositionY = Integer.parseInt( ytext );
+			}
+
+		}
 	}
 
 	public void mouseDown( int button, int x, int y )
@@ -182,12 +224,13 @@ public class ImageType
 	 * Constructor
 	 */
 
-	private ImageType( BufferedImage shownImage, int x, int y )
+	private ImageType( BufferedImage shownImage, int x, int y, String name )
 	{
 		setSelected( false );
 		this.shownImage = shownImage;
 		getPositionX = x;
 		getPositionY = y;
+		this.name = name;
 	}
 
 }

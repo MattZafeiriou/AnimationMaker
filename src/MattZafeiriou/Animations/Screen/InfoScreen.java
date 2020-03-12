@@ -12,14 +12,14 @@ import MattZafeiriou.Animations.Utils.MouseCursor;
 public class InfoScreen
 {
 
-	private JFrame frame;
+	private static JFrame frame;
 
 	private int percentX = 0, percentY = 0, percentW = 0, percentH = 0;
-	private int Width = 0, Height = 0, X = 0, Y = 0;
+	private static int Width = 0, Height = 0, X = 0, Y = 0;
 
-	public void init( JFrame frame, int percentX, int percentY, int percentW, int percentH )
+	public void init( JFrame jframe, int percentX, int percentY, int percentW, int percentH )
 	{
-		this.frame = frame;
+		frame = jframe;
 		this.percentX = percentX;
 		this.percentY = percentY;
 		this.percentW = percentW;
@@ -29,15 +29,13 @@ public class InfoScreen
 		Y = ( frame.getWidth() / 100 ) * percentY + 25;
 		Width = ( frame.getWidth() / 100 ) * percentW;
 		Height = ( frame.getWidth() / 100 ) * percentH - 25;
-
-		InfoBox.createBox( "Name", X + 10, InfoBox.Type.INPUT, frame, 50 );
 	}
 
 	public void render( Graphics g )
 	{
 		int mouseX = Mouse.getInstance().getX();
 		int mouseY = Mouse.getInstance().getY();
-		if( mouseX >= this.X && mouseX <= this.X + this.Width && mouseY >= this.Y && mouseY <= this.Y + this.Height )
+		if( mouseX >= X && mouseX <= X + Width && mouseY >= Y && mouseY <= Y + Height )
 		{
 			MouseCursor.changeCursor( Cursor.getPredefinedCursor( Cursor.DEFAULT_CURSOR ), 5 );
 		}
@@ -57,7 +55,23 @@ public class InfoScreen
 		Y = (int) ( ( frame.getWidth() / 100.0d ) * percentY + 25 );
 		Width = (int) ( ( frame.getWidth() / 100.0d ) * percentW );
 		Height = (int) ( ( frame.getWidth() / 100.0d ) * percentH - 25 );
-		InfoBox.setBoxesX( X + 10 );
+	}
+
+	public static void createBox( String name, InfoBox.Type type, int maxChars )
+	{
+		InfoBox.createBox( name, Y, X + 10, type, frame, maxChars );
+	}
+
+	public static void createBox( String name, InfoBox.Type type, int maxChars, String value )
+	{
+		InfoBox.createBox( name, Y, X + 10, type, frame, maxChars ).setInputValue( value );
+		;
+	}
+
+	public static void createBox( String name, InfoBox.Type type, int maxChars, boolean value )
+	{
+		InfoBox.createBox( name, Y, X + 10, type, frame, maxChars ).setCheckBoxValue( value );
+		;
 	}
 
 }

@@ -19,7 +19,7 @@ import MattZafeiriou.Animations.Utils.MouseCursor;
 public class InfoBox
 {
 
-	private static int currentY = 100;
+	private static int currentY = 10;
 
 	public static List< InfoBox > boxes = new ArrayList< InfoBox >();
 	private static JFrame frame;
@@ -29,13 +29,56 @@ public class InfoBox
 		CHECKBOX, INPUT
 	}
 
-	public static InfoBox createBox( String name, int x, Type type, JFrame jframe, int maxChars )
+	/**
+	 * Creates a new infoBox object and returns it
+	 *
+	 * @param name     The name of the infobox. Must be unique.
+	 * @param minimumY The minimum y location on the canvas we can draw it
+	 * @param x        The x position on the canvas we should draw it
+	 * @param type     The type of the infobox
+	 * @param jframe   The frame the canvas is. We need some variables from it.
+	 * @param maxChars The maximum amount of the chars the text field should have.
+	 *                 Only for type == INPUT
+	 * @return The created infobox
+	 */
+	public static InfoBox createBox( String name, int minimumY, int x, Type type, JFrame jframe, int maxChars )
 	{
-		InfoBox ib = new InfoBox( name, x, currentY, type, maxChars );
-		frame = jframe;
-		boxes.add( ib );
-		currentY += 20;
-		return ib;
+		if( getBoxByName( name ) == null )
+		{
+			InfoBox ib = new InfoBox( name, x, currentY + minimumY, type, maxChars );
+			frame = jframe;
+			boxes.add( ib );
+			currentY += 30;
+			return ib;
+		} else
+			return null;
+	}
+
+	public static void makeSection( int height )
+	{
+		currentY += height;
+	}
+
+	public static void deleteBoxes()
+	{
+		currentY = 10;
+		boxes = new ArrayList< InfoBox >();
+	}
+
+	public static InfoBox getBoxByName( String name )
+	{
+		InfoBox box = null;
+
+		for( InfoBox i : boxes )
+		{
+			if( i.name.equals( name ) )
+			{
+				box = i;
+				break;
+			}
+		}
+
+		return box;
 	}
 
 	public static void setBoxesX( int x )
@@ -158,6 +201,26 @@ public class InfoBox
 		}
 	}
 
+	public void setInputValue( String value )
+	{
+		input = value;
+	}
+
+	public void setCheckBoxValue( boolean value )
+	{
+		this.isChecked = value;
+	}
+
+	public String getInputValue()
+	{
+		return input;
+	}
+
+	public boolean getCheckBoxValue()
+	{
+		return isChecked;
+	}
+
 	public void mouseUp( int button, int x, int y )
 	{
 		if( type == Type.CHECKBOX )
@@ -178,7 +241,7 @@ public class InfoBox
 					canType = true;
 					toggleCursor = 0;
 					cursorShown = true;
-					cursorPos = 0;
+					cursorPos = input.length();
 				}
 			} else
 			{
@@ -202,7 +265,7 @@ public class InfoBox
 					{
 						if( ! ( input.charAt( input.length() - 1 ) == ' ' && key == ' ' ) )
 						{
-							input += key;
+							input = input.substring( 0, cursorPos ) + key + input.substring( cursorPos );
 							cursorPos++;
 						}
 					} else
@@ -217,8 +280,11 @@ public class InfoBox
 				{
 					if( input.length() != 0 )
 					{
-						input = input.substring( 0, input.length() - 1 );
-						cursorPos--;
+						if( cursorPos != 0 )
+						{
+							input = input.substring( 0, cursorPos - 1 ) + input.substring( cursorPos );
+							cursorPos--;
+						}
 						toggleCursor = 0;
 						cursorShown = true;
 					}
@@ -226,10 +292,16 @@ public class InfoBox
 				{
 					if( --cursorPos < 0 )
 						cursorPos = 0;
+
+					toggleCursor = 0;
+					cursorShown = true;
 				} else if( keyCode == 39 )
 				{
 					if( ++cursorPos > input.length() )
 						cursorPos = input.length();
+
+					toggleCursor = 0;
+					cursorShown = true;
 				}
 			}
 		}
