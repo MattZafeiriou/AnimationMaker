@@ -170,27 +170,32 @@ public class ImageType
 
 		if( getSelectedImage == this )
 		{
-			this.name = InfoBox.getBoxByName( "Name" ).getInputValue();
-			String xtext = InfoBox.getBoxByName( "X" ).getInputValue();
-			if( xtext.matches( "-?\\d+" ) )
+			try
 			{
-				if( Long.parseLong( xtext ) > Integer.MAX_VALUE )
-					this.getPositionX = Integer.MAX_VALUE;
-				else if( Long.parseLong( xtext ) < Integer.MIN_VALUE )
-					this.getPositionX = Integer.MIN_VALUE;
-				else
-					this.getPositionX = Integer.parseInt( xtext );
-			}
+				this.name = InfoBox.getBoxByName( "Name" ).getInputValue();
+				String xtext = InfoBox.getBoxByName( "X" ).getInputValue();
+				if( xtext.matches( "-?\\d+" ) )
+				{
+					if( Long.parseLong( xtext ) > Integer.MAX_VALUE )
+						this.getPositionX = Integer.MAX_VALUE;
+					else if( Long.parseLong( xtext ) < Integer.MIN_VALUE )
+						this.getPositionX = Integer.MIN_VALUE;
+					else
+						this.getPositionX = Integer.parseInt( xtext );
+				}
 
-			String ytext = InfoBox.getBoxByName( "Y" ).getInputValue();
-			if( ytext.matches( "-?\\d+" ) )
+				String ytext = InfoBox.getBoxByName( "Y" ).getInputValue();
+				if( ytext.matches( "-?\\d+" ) )
+				{
+					if( Long.parseLong( ytext ) > Integer.MAX_VALUE )
+						this.getPositionY = Integer.MAX_VALUE;
+					else if( Long.parseLong( ytext ) < Integer.MIN_VALUE )
+						this.getPositionY = Integer.MIN_VALUE;
+					else
+						this.getPositionY = Integer.parseInt( ytext );
+				}
+			} catch( NullPointerException e )
 			{
-				if( Long.parseLong( ytext ) > Integer.MAX_VALUE )
-					this.getPositionY = Integer.MAX_VALUE;
-				else if( Long.parseLong( ytext ) < Integer.MIN_VALUE )
-					this.getPositionY = Integer.MIN_VALUE;
-				else
-					this.getPositionY = Integer.parseInt( ytext );
 			}
 
 		}
