@@ -33,9 +33,9 @@ public class Element
 
 		if( isHovering )
 		{
-			g.setColor( new Color( 60, 60, 60 ) );
+			g.setColor( ProgramVariables.SECONDARY_COLOR );
 		} else
-			g.setColor( new Color( 40, 40, 40 ) );
+			g.setColor( ProgramVariables.MAIN_COLOR );
 		g.fillRect( x, y, width, height );
 
 		g.setColor( new Color( 255, 255, 255, 200 ) );

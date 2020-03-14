@@ -6,6 +6,7 @@ import java.awt.Graphics;
 
 import javax.swing.JFrame;
 
+import MattZafeiriou.Animations.Program.ProgramVariables;
 import MattZafeiriou.Animations.Utils.Mouse;
 import MattZafeiriou.Animations.Utils.MouseCursor;
 
@@ -40,7 +41,7 @@ public class InfoScreen
 			MouseCursor.changeCursor( Cursor.getPredefinedCursor( Cursor.DEFAULT_CURSOR ), 5 );
 		}
 
-		g.setColor( new Color( 60, 60, 60 ) );
+		g.setColor( ProgramVariables.SECONDARY_COLOR );
 		g.fillRect( X, Y, Width, Height );
 
 		InfoBox.renderBoxes( g );

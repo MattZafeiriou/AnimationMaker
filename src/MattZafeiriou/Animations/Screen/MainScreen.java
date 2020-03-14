@@ -97,19 +97,21 @@ public class MainScreen
 
 		// draw scale level
 		// background
-		g.setColor( new Color( 60, 60, 60, 150 ) );
+		g.setColor( new Color( ProgramVariables.MAIN_COLOR.getRed(), ProgramVariables.MAIN_COLOR.getGreen(),
+				ProgramVariables.MAIN_COLOR.getBlue(), 150 ) );
 		g.fillRoundRect( getCanvasPositionX + 10, getCanvasPositionY + getCanvasHeight - 150, 50, 140, 8, 8 );
 		// foreground
-		g.setColor( new Color( 80, 80, 80 ) );
+		g.setColor( ProgramVariables.SECONDARY_COLOR );
 		g.drawRoundRect( getCanvasPositionX + 30, getCanvasPositionY + getCanvasHeight - 130, 10, 100, 5, 8 );
 
 		// + and - strings up and down
-		g.setColor( new Color( 50, 50, 50 ) );
+		g.setColor( new Color( 255, 255, 255, 150 ) );
 		g.drawString( "+", getCanvasPositionX + 30, getCanvasPositionY + getCanvasHeight - 138 );
 		g.drawString( "-", getCanvasPositionX + 32, getCanvasPositionY + getCanvasHeight - 13 );
 
 		// circle
-		g.setColor( new Color( 36, 103, 112 ) );
+		g.setColor( new Color( ProgramVariables.HIGHLIGHT_COLOR.getRed(), ProgramVariables.HIGHLIGHT_COLOR.getGreen(),
+				ProgramVariables.HIGHLIGHT_COLOR.getBlue(), 150 ) );
 		g.fillOval( getCanvasPositionX + 27, getCanvasPositionY + getCanvasHeight - (int) ( 86 * scaleKeyValue ), 16,
 				16 );
 
@@ -204,14 +206,15 @@ public class MainScreen
 				if( y <= getCanvasPositionY )
 					finalPositionY = getCanvasPositionY;
 
-				g.setColor( new Color( 50, 50, 50, 220 ) );
+				g.setColor( new Color( ProgramVariables.MAIN_COLOR.getRed(), ProgramVariables.MAIN_COLOR.getGreen(),
+						ProgramVariables.MAIN_COLOR.getBlue(), 220 ) );
 				g.fillRect( finalPositionX, finalPositionY, width, height );
 				g.setColor( new Color( 255, 255, 255, 220 ) );
 
 				g.drawString( text, finalPositionX + 3, finalPositionY + textheight - 4 );
 			} else
 			{
-				g.setColor( new Color( 204, 25, 54 ) );
+				g.setColor( ProgramVariables.POINT_COLOR );
 				g.fillOval( Position.getXPoint( pins.get( i ).x, XOffset, canvasScale, getCanvasPositionX ) - 2,
 						Position.getYPoint( pins.get( i ).y, YOffset, canvasScale, getCanvasPositionY ) - 2, 4, 4 );
 			}

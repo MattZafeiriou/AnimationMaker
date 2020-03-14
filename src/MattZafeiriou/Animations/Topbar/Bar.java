@@ -102,12 +102,12 @@ public class Bar
 		g.setFont( font );
 
 		// draw background
-		g.setColor( new Color( 5, 5, 5, 100 ) );
+		g.setColor( ProgramVariables.SEPARATOR_COLOR );
 		g.fillRoundRect( x - 1, y - 1, width + 2, height + 2, 7, 7 );
 		if( isHovering || isOpen )
-			g.setColor( new Color( 60, 60, 60 ) );
+			g.setColor( ProgramVariables.SECONDARY_COLOR );
 		else
-			g.setColor( new Color( 100, 100, 100 ) );
+			g.setColor( ProgramVariables.MAIN_COLOR );
 		g.fillRoundRect( x, y, width, height, 7, 7 );
 
 		// draw name

@@ -14,6 +14,10 @@ import MattZafeiriou.Animations.Utils.Mouse;
 import MattZafeiriou.Animations.Utils.MouseCursor;
 import MattZafeiriou.Animations.Utils.Window;
 
+/*
+ * Main class. Creates threads and the loop
+ * 
+ */
 public class Animation implements Runnable
 {
 

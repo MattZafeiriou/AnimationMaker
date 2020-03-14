@@ -189,7 +189,6 @@ public class InfoBox
 			}
 
 			g.setColor( Color.black );
-			g.setColor( Color.black );
 			g.fillRect( posX, y + 2, width, stringHeight + 2 );
 			g.setColor( new Color( 220, 220, 220 ) );
 			g.fillRect( posX + 1, y + 3, width - 2, stringHeight );

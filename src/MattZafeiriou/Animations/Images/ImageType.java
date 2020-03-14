@@ -1,7 +1,6 @@
 package MattZafeiriou.Animations.Images;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -122,7 +121,7 @@ public class ImageType
 		{
 			( (Graphics2D) g ).setStroke( new BasicStroke( 3 * scale ) );
 
-			g.setColor( new Color( 52, 235, 198 ) );
+			g.setColor( ProgramVariables.HIGHLIGHT_COLOR );
 			g.drawRect( Position.getXPoint( getPositionX, XOffset, scale, getCanvasPositionX ),
 					Position.getYPoint( getPositionY, YOffset, scale, getCanvasPositionY ),
 					(int) ( shownImage.getWidth() * scale ), (int) ( shownImage.getHeight() * scale ) );
@@ -136,7 +135,7 @@ public class ImageType
 
 			( (Graphics2D) g ).setStroke( new BasicStroke( 3 * scale ) );
 
-			g.setColor( new Color( 194, 194, 194 ) );
+			g.setColor( ProgramVariables.HOVER_COLOR );
 			g.drawRect( Position.getXPoint( getPositionX, XOffset, scale, getCanvasPositionX ),
 					Position.getYPoint( getPositionY, YOffset, scale, getCanvasPositionY ),
 					(int) ( shownImage.getWidth() * scale ), (int) ( shownImage.getHeight() * scale ) );

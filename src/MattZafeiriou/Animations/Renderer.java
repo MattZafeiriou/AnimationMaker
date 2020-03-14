@@ -15,6 +15,8 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import MattZafeiriou.Animations.ImageTools.Transform;
+import MattZafeiriou.Animations.Program.ProgramVariables;
 import MattZafeiriou.Animations.Screen.InfoScreen;
 import MattZafeiriou.Animations.Screen.MainScreen;
 import MattZafeiriou.Animations.Topbar.Bar;
@@ -32,6 +34,7 @@ public class Renderer
 	private static Mouse mouse;
 	private static MainScreen mainScreen = new MainScreen();
 	private static InfoScreen infoScreen = new InfoScreen();
+	private static Transform transform = new Transform();
 
 	private static BufferedImage Minimize = Loader.loadImage( "AnimationMaker/res/Buttons/Minimize.png" );
 	private static BufferedImage Maximize = Loader.loadImage( "AnimationMaker/res/Buttons/Maximize.png" );
@@ -75,10 +78,11 @@ public class Renderer
 	{
 		// screen draw
 		mainScreen.render( g );
+		transform.render( g );
 		infoScreen.render( g );
 
 		// menu bar
-		g.setColor( new Color( 80, 80, 80 ) );
+		g.setColor( ProgramVariables.SECONDARY_COLOR );
 		g.fillRect( 0, 0, width, 25 );
 
 		drawTopButtons( 40, 30 );
@@ -91,13 +95,14 @@ public class Renderer
 	private static void drawTopButtons( int ButtonWidth, int ButtonHeight )
 	{
 		// buttons bar
-		g.setColor( new Color( 30, 30, 30 ) );
+		g.setColor( ProgramVariables.SEPARATOR_COLOR );
 		g.drawRoundRect( width - ButtonWidth * 3 - 10, - 10, ButtonWidth * 3, ButtonHeight, 10, 20 );
 		// minimize button
 		// button background
 		g.setColor( mouse.mouseIsInside( width - 10 - ButtonWidth * 3, - 10, ButtonWidth, ButtonHeight )
-				? new Color( 20, 20, 20 )
-				: new Color( 50, 50, 50 ) );
+				? new Color( ProgramVariables.MAIN_COLOR.getRed() - 30, ProgramVariables.MAIN_COLOR.getGreen() - 30,
+						ProgramVariables.MAIN_COLOR.getBlue() - 30 )
+				: ProgramVariables.MAIN_COLOR );
 		g.fillRoundRect( width - 10 - ButtonWidth * 3, - 10, ButtonWidth + 4, ButtonHeight, 10, 20 );
 
 		// draw image
@@ -106,8 +111,9 @@ public class Renderer
 		// close button
 		// button background
 		g.setColor( mouse.mouseIsInside( width - 10 - ButtonWidth, - 10, ButtonWidth, ButtonHeight )
-				? new Color( 20, 20, 20 )
-				: new Color( 50, 50, 50 ) );
+				? new Color( ProgramVariables.MAIN_COLOR.getRed() - 30, ProgramVariables.MAIN_COLOR.getGreen() - 30,
+						ProgramVariables.MAIN_COLOR.getBlue() - 30 )
+				: ProgramVariables.MAIN_COLOR );
 		g.fillRoundRect( width - 10 - ButtonWidth - 2, - 10, ButtonWidth + 2, ButtonHeight, 10, 20 );
 
 		// draw image
@@ -116,15 +122,16 @@ public class Renderer
 		// maximize button
 		// button background
 		g.setColor( mouse.mouseIsInside( width - 10 - ButtonWidth * 2, - 10, ButtonWidth, ButtonHeight )
-				? new Color( 20, 20, 20 )
-				: new Color( 50, 50, 50 ) );
+				? new Color( ProgramVariables.MAIN_COLOR.getRed() - 30, ProgramVariables.MAIN_COLOR.getGreen() - 30,
+						ProgramVariables.MAIN_COLOR.getBlue() - 30 )
+				: ProgramVariables.MAIN_COLOR );
 		g.fillRect( width - 10 - ButtonWidth * 2, - 10, ButtonWidth, ButtonHeight );
 
 		// draw image
 		g.drawImage( Maximize, width - ButtonWidth * 2 + 5, 5, null );
 
 		// button separator lines
-		g.setColor( new Color( 30, 30, 30 ) );
+		g.setColor( ProgramVariables.SEPARATOR_COLOR );
 		g.drawLine( width - ButtonWidth - 10, 0, width - ButtonWidth - 10, ButtonHeight - 10 );
 		g.drawLine( width - ButtonWidth * 2 - 10, 0, width - ButtonWidth * 2 - 10, ButtonHeight - 10 );
 	}
@@ -133,6 +140,7 @@ public class Renderer
 	{
 		mainScreen.tick();
 		infoScreen.update();
+		transform.update();
 	}
 
 	public static void show()
